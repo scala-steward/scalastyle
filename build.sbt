@@ -64,7 +64,7 @@ libraryDependencies ++= Seq(
   "junit"                  % "junit"                    % "4.11" % "test",
   "com.novocode"           % "junit-interface"          % "0.10" % "test",
   "com.google.guava"       % "guava"                    % "17.0" % "test",
-  "org.scalatest"          %% "scalatest"               % "3.0.8" % "test"
+  "org.scalatest"          %% "scalatest"               % "3.1.0" % "test"
 )
 
 // Test
