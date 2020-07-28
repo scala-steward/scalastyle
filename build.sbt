@@ -64,7 +64,7 @@ libraryDependencies ++= Seq(
   "com.typesafe"           % "config"                   % "1.4.0",
   "junit"                  % "junit"                    % "4.13" % "test",
   "com.novocode"           % "junit-interface"          % "0.11" % "test",
-  "com.google.guava"       % "guava"                    % "23.0" % "test",
+  "com.google.guava"       % "guava"                    % "23.6.1-jre" % "test",
   "org.scalatest"          %% "scalatest"               % "3.1.2" % "test",
   "org.scalatestplus"      %% "junit-4-12"              % "3.1.2.0" % "test",
   "org.scalameta"          %% "munit"                   % "0.7.7" % "test"
