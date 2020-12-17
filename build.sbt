@@ -67,7 +67,7 @@ libraryDependencies ++= Seq(
   "com.google.guava"       % "guava"                    % "29.0-jre" % "test",
   "org.scalatest"          %% "scalatest"               % "3.2.2" % "test",
   "org.scalatestplus"      %% "junit-4-13"              % "3.2.2.0" % "test",
-  "org.scalameta"          %% "munit"                   % "0.7.13" % "test"
+  "org.scalameta"          %% "munit"                   % "0.7.20" % "test"
 )
 
 // Test
