@@ -62,7 +62,7 @@ libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-collection-compat" % "2.3.2",
   "org.scalariform"        %% "scalariform"             % "0.2.10",
   "com.typesafe"            % "config"                  % "1.4.1",
-  "junit"                   % "junit"                   % "4.13.1"   % "test",
+  "junit"                   % "junit"                   % "4.13.2"   % "test",
   "com.novocode"            % "junit-interface"         % "0.11"     % "test",
   "com.google.guava"        % "guava"                   % "30.1-jre" % "test",
   "org.scalatest"          %% "scalatest"               % "3.2.3"    % "test",
