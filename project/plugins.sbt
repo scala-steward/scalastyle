@@ -1,4 +1,4 @@
-addSbtPlugin("com.eed3si9n"        % "sbt-assembly"   % "0.15.0")
+addSbtPlugin("com.eed3si9n"        % "sbt-assembly"   % "1.0.0")
 addSbtPlugin("com.eed3si9n"        % "sbt-buildinfo"  % "0.10.0")
 addSbtPlugin("com.geirsson"        % "sbt-ci-release" % "1.5.5")
 addSbtPlugin("org.scoverage"       % "sbt-scoverage"  % "1.6.1")
