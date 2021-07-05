@@ -52,17 +52,17 @@ trait Output[T <: FileSpec] {
 
   def eachMessage(m: Message[T]): Unit =
     m match {
-      case StartWork()     =>
-      case EndWork()       =>
-      case StartFile(file) => files += 1
-      case EndFile(file)   =>
-      case StyleError(file, clazz, key, level, args, line, column, customMessage) =>
+      case StartWork()  =>
+      case EndWork()    =>
+      case StartFile(_) => files += 1
+      case EndFile(_)   =>
+      case StyleError(_, _, _, level, _, _, _, _) =>
         level match {
           case WarningLevel => warnings += 1
           case InfoLevel    => infos += 1
           case _            => errors += 1
         }
-      case StyleException(file, clazz, message, stacktrace, line, column) => errors += 1
+      case StyleException(_, _, _, _, _, _) => errors += 1
     }
 
   def message(m: Message[T]): Unit
@@ -81,21 +81,21 @@ class TextOutput[T <: FileSpec](config: Config, verbose: Boolean = false, quiet:
       case EndWork()       =>
       case StartFile(file) => if (verbose) println("start file " + file)
       case EndFile(file)   => if (verbose) println("end file " + file)
-      case StyleError(file, clazz, key, level, args, line, column, customMessage) =>
+      case StyleError(file, _, key, level, args, line, column, customMessage) =>
         if (!quiet || verbose) {
           println(
             messageHelper.text(level.name) + print("file", file.name) +
-                print("message", Output.findMessage(messageHelper, key, args, customMessage)) +
-                print("line", line) + print("column", column)
+              print("message", Output.findMessage(messageHelper, key, args, customMessage)) +
+              print("line", line) + print("column", column)
           )
         }
-      case StyleException(file, clazz, message, stacktrace, line, column) =>
+      case StyleException(file, _, message, _, line, column) =>
         if (!quiet || verbose) {
           println(
             "error" + print("file", file.name) + print("message", message) + print("line", line) + print(
-                  "column",
-                  column
-                )
+              "column",
+              column
+            )
           )
         }
     }
@@ -181,24 +181,22 @@ object XmlOutput {
         .groupBy {
           _.filename
         }
-        .map {
-          case (filename, alerts) =>
-            <file name={filename}>
+        .map { case (filename, alerts) =>
+          <file name={filename}>
           {
-              alerts.map {
-                case Alert(fn, severity, message, source, line, column) =>
-                  val s = source.collect {
-                    case x: Class[_] => x.getName
-                  }
-                  <error severity={severity} message={message}/> % attr("source", s) % attr(
-                    "line",
-                    line
-                  ) % attr(
-                    "column",
-                    column
-                  )
+            alerts.map { case Alert(fn, severity, message, source, line, column) =>
+              val s = source.collect { case x: Class[_] =>
+                x.getName
               }
+              <error severity={severity} message={message}/> % attr("source", s) % attr(
+                "line",
+                line
+              ) % attr(
+                "column",
+                column
+              )
             }
+          }
         </file>
         }
     }

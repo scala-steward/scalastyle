@@ -41,10 +41,10 @@ trait SpaceAroundTokenChecker extends ScalariformChecker {
     (for {
       l @ List(left, middle, right) <- ast.tokens.sliding(3)
       if (l.forall(x => x.tokenType != Tokens.NEWLINE && x.tokenType != Tokens.NEWLINES)
-        && tokens.contains(middle.tokenType)
-        && !(middle.associatedWhitespaceAndComments.containsNewline && beforeToken)
-        && (!right.associatedWhitespaceAndComments.containsNewline || beforeToken)
-        && checkSpaces(left, middle, right))
+      && tokens.contains(middle.tokenType)
+      && !(middle.associatedWhitespaceAndComments.containsNewline && beforeToken)
+      && (!right.associatedWhitespaceAndComments.containsNewline || beforeToken)
+      && checkSpaces(left, middle, right))
     } yield PositionError(middle.offset, List(middle.text))).toList
   }
 

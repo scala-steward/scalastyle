@@ -77,7 +77,7 @@ class ScalastyleChecker[T <: FileSpec](classLoader: Option[ClassLoader] = None) 
     StartWork() :: files
       .flatMap(file =>
         StartFile(file) :: checkerUtils.verifyFile(configuration, checks, file) :::
-            List(EndFile(file))
+          List(EndFile(file))
       )
       .toList ::: List(EndWork())
   }
@@ -96,10 +96,9 @@ object Checker {
     Lines(
       source
         .split("\n")
-        .scanLeft(Line("", 0, 0)) {
-          case (pl, t) =>
-            val text = if (t.endsWith("\r")) t.init else t
-            Line(text, pl.end, pl.end + t.length + 1)
+        .scanLeft(Line("", 0, 0)) { case (pl, t) =>
+          val text = if (t.endsWith("\r")) t.init else t
+          Line(text, pl.end, pl.end + t.length + 1)
         }
         .tail,
       source.charAt(source.length() - 1)
@@ -275,7 +274,7 @@ trait Checker[A] {
     val sErrorKey = customErrorKey.getOrElse(errorKey)
 
     p2 match {
-      case PositionError(position, args, key) =>
+      case PositionError(_, args, key) =>
         StyleError(file, this.getClass, key.getOrElse(sErrorKey), level, args, customMessage = customMessage)
       case FileError(args, key) =>
         StyleError(file, this.getClass, key.getOrElse(sErrorKey), level, args, None, None, customMessage)

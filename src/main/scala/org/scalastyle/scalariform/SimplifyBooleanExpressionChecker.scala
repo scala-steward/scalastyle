@@ -76,7 +76,7 @@ class SimplifyBooleanExpressionChecker extends ScalariformChecker {
 
   private def boolean(expr: List[Clazz[_]]) =
     expr.size == 1 && expr(0)
-        .isInstanceOf[GeneralTokensClazz] && expr(0).asInstanceOf[GeneralTokensClazz].bool
+      .isInstanceOf[GeneralTokensClazz] && expr(0).asInstanceOf[GeneralTokensClazz].bool
 
   private def isBoolean(t: GeneralTokens): Boolean = t.tokens.size == 1 && isBoolean(t.tokens(0))
   private def isBoolean(t: Token): Boolean = Set(TRUE, FALSE).contains(t.tokenType)

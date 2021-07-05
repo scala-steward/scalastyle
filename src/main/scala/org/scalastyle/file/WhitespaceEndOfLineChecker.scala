@@ -32,21 +32,19 @@ class WhitespaceEndOfLineChecker extends FileChecker {
     val sb = s.reverse
 
     (for {
-      withoutEndOfLines <- Some(sb.zipWithIndex.dropWhile {
-        case (c: Char, idx: Int) => endOfLines.contains(c)
+      withoutEndOfLines <- Some(sb.zipWithIndex.dropWhile { case (c: Char, idx: Int) =>
+        endOfLines.contains(c)
       })
       (nextChar, eolIndex) <- withoutEndOfLines.headOption
       if whitespaces.contains(nextChar)
     } yield {
       withoutEndOfLines
-        .dropWhile {
-          case (c: Char, idx: Int) =>
-            whitespaces.contains(c)
+        .dropWhile { case (c: Char, idx: Int) =>
+          whitespaces.contains(c)
         }
         .headOption
-        .map {
-          case (c: Char, idx: Int) =>
-            (true, s.length() - idx)
+        .map { case (c: Char, idx: Int) =>
+          (true, s.length() - idx)
         }
         .getOrElse {
           if (ignoreWhitespaceLines) (false, 0)

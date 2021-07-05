@@ -88,8 +88,21 @@ class Foobar {
 }
 """.replace("###", "\"\"\"")
 
-    assertErrors(List(columnError(5, 10, List(""""foobar
-  oop"""", "2", "1"))), source)
+    assertErrors(
+      List(
+        columnError(
+          5,
+          10,
+          List(
+            """"foobar
+  oop"""",
+            "2",
+            "1"
+          )
+        )
+      ),
+      source
+    )
   }
 
   @Test def testMultiLineAndNormal(): Unit = {

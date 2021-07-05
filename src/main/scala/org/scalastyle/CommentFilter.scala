@@ -104,7 +104,7 @@ object CommentFilter {
       (cf.start, cf.end) match {
         case (Some(s), Some(e)) => m >= s.line && m < e.line
         case (Some(s), None)    => m >= s.line
-        case (None, Some(e))    => false // we just have an :off, filter doesn't apply
+        case (None, Some(_))    => false // we just have an :off, filter doesn't apply
         case (None, None)       => false // this isn't possible, say it doesn't apply
       }
     }

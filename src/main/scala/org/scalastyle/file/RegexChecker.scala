@@ -54,10 +54,10 @@ class RegexChecker extends FileChecker {
         val matchedLine = findCorrespondingLine(location, lines)
 
         errorList = ColumnError(
-            matchedLine + 1,
-            findColumnPosition(location, lines, matchedLine),
-            List(regExpStr)
-          ) :: errorList
+          matchedLine + 1,
+          findColumnPosition(location, lines, matchedLine),
+          List(regExpStr)
+        ) :: errorList
       }
     }
 

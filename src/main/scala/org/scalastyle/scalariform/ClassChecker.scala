@@ -62,12 +62,12 @@ class ClassTypeParameterChecker extends AbstractClassChecker {
     ast match {
       case typeParam: TypeParam =>
         typeParam.contents match {
-          case List(GeneralTokens(list))                             => Some(list.head.text)
-          case List(GeneralTokens(list), TypeParamClause(x))         => innermostName(x(1))
-          case VarianceTypeElement(_) :: GeneralTokens(list) :: Nil  => Some(list.head.text)
-          case GeneralTokens(list) :: tail                           => Some(list.head.text)
-          case VarianceTypeElement(_) :: GeneralTokens(list) :: tail => Some(list.head.text)
-          case _                                                     => None
+          case List(GeneralTokens(list))                            => Some(list.head.text)
+          case List(GeneralTokens(_), TypeParamClause(x))           => innermostName(x(1))
+          case VarianceTypeElement(_) :: GeneralTokens(list) :: Nil => Some(list.head.text)
+          case GeneralTokens(list) :: _                             => Some(list.head.text)
+          case VarianceTypeElement(_) :: GeneralTokens(list) :: _   => Some(list.head.text)
+          case _                                                    => None
         }
       case _ => None
     }

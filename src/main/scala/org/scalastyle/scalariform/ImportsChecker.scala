@@ -71,7 +71,7 @@ abstract class AbstractImportChecker extends ScalariformChecker {
     val is = t.importSelectors
 
     val firsts = is.firstImportSelector.firstToken.text ::
-          is.otherImportSelectors.map(_._2).map(is => is.firstToken.text)
+      is.otherImportSelectors.map(_._2).map(is => is.firstToken.text)
     firsts.map(f => imports(t.prefixExpr.tokens) + f)
   }
 
@@ -282,13 +282,12 @@ class ImportOrderChecker extends ScalariformChecker {
 
     val errors = new ListBuffer[ScalastyleError]()
     val names = Seq(first.contents.head.tokens.head.text) ++
-          others.map(_._2.contents.head.tokens.head.text)
+      others.map(_._2.contents.head.tokens.head.text)
 
     if (names.size > 1) {
-      names.sliding(2).foreach {
-        case Seq(left, right) =>
-          if (compareNames(left, right, isImport = false) > 0)
-            errors += newError(selectors.firstToken.offset, "wrongOrderInSelector", right, left)
+      names.sliding(2).foreach { case Seq(left, right) =>
+        if (compareNames(left, right, isImport = false) > 0)
+          errors += newError(selectors.firstToken.offset, "wrongOrderInSelector", right, left)
       }
     }
 

@@ -97,10 +97,10 @@ object ScalastyleConfiguration {
 
   private[this] def fromXml(elem: Elem) = {
     val commentFilter = elem
-        .attribute("commentFilter")
-        .getOrElse(scala.xml.Text(Enabled))
-        .text
-        .toLowerCase() != Disabled
+      .attribute("commentFilter")
+      .getOrElse(scala.xml.Text(Enabled))
+      .text
+      .toLowerCase() != Disabled
     val name = (elem \\ Name).text
 
     ScalastyleConfiguration(name, commentFilter, (elem \\ "check").map(toCheck).toList)

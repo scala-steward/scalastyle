@@ -131,8 +131,8 @@ class ScalaDocChecker extends CombinedChecker {
     def params(xs: List[Token]): List[String] =
       xs match {
         // @annotation a: B; @annotation(...) a: B
-        case Token(_, "@", _, _) :: Token(_, annotation, _, _) ::
-                Token(_, paramName, _, _) :: Token(_, ":", _, _) :: Token(_, _, _, _) :: t =>
+        case Token(_, "@", _, _) :: Token(_, _, _, _) ::
+            Token(_, paramName, _, _) :: Token(_, ":", _, _) :: Token(_, _, _, _) :: t =>
           paramName :: params(t)
         // a: B
         case Token(_, paramName, _, _) :: Token(_, ":", _, _) :: Token(_, _, _, _) :: t =>
@@ -174,11 +174,11 @@ class ScalaDocChecker extends CombinedChecker {
         xs match {
           // [... @foo A ...]
           case Token(Tokens.AT, _, _, _) :: Token(Tokens.VARID, _, _, _) :: Token(
-                    Tokens.VARID,
-                    paramName,
-                    _,
-                    _
-                  ) :: t =>
+                Tokens.VARID,
+                paramName,
+                _,
+                _
+              ) :: t =>
             paramName :: tparams(t, bracketDepth)
           // [... @foo(...) A ...]
           case Token(Tokens.RPAREN, _, _, _) :: Token(Tokens.VARID, paramName, _, _) :: t =>
@@ -357,16 +357,16 @@ class ScalaDocChecker extends CombinedChecker {
 
       case t: StatSeq =>
         localVisit(skip, fallback, ignoreOverride, indentStyle, lines, tokensToIgnore)(t.firstStatOpt) ++ (
-              for (statOpt <- t.otherStats)
-                yield localVisit(
-                  skip,
-                  statOpt._1.associatedWhitespaceAndComments,
-                  ignoreOverride,
-                  indentStyle,
-                  lines,
-                  tokensToIgnore
-                )(statOpt._2)
-            ).flatten
+          for (statOpt <- t.otherStats)
+            yield localVisit(
+              skip,
+              statOpt._1.associatedWhitespaceAndComments,
+              ignoreOverride,
+              indentStyle,
+              lines,
+              tokensToIgnore
+            )(statOpt._2)
+        ).flatten
 
       case t: Any =>
         // anything else, we descend (unless we stopped above)
@@ -380,7 +380,7 @@ class ScalaDocChecker extends CombinedChecker {
     if (wrongTokensToIgnore.nonEmpty) {
       throw new IllegalArgumentException(
         s"ignoreTokenTypes contained wrong types: $wrongTokensToIgnore, " +
-            s"available types are $availableTokensToIgnore"
+          s"available types are $availableTokensToIgnore"
       )
     }
   }

@@ -24,9 +24,9 @@ import org.scalastyle.ScalastyleError
 
 object NormalizedLine {
   def normalize(lines: Lines, tabSize: Int): Array[NormalizedLine] =
-    lines.lines.zipWithIndex map {
-        case (line, index) => NormalizedLine(index + 1, line, tabSize)
-      }
+    lines.lines.zipWithIndex map { case (line, index) =>
+      NormalizedLine(index + 1, line, tabSize)
+    }
 }
 
 case class NormalizedLine(lineNumber: Int, line: Line, tabSize: Int) {
