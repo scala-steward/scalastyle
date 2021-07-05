@@ -100,7 +100,14 @@ scalafmtOnCompile in ThisBuild :=
     .forall(_.toLowerCase == "false")
 
 // assembly
-test in assembly := {}
+ThisBuild / assemblyMergeStrategy := {
+  case PathList("META-INF", xs @ _*) =>
+    xs match {
+      case ("MANIFEST.MF" :: Nil) => MergeStrategy.discard
+      case _                      => MergeStrategy.first
+    }
+  case _ => MergeStrategy.first
+}
 artifact in (Compile, assembly) := {
   val art = (artifact in (Compile, assembly)).value
   art.withClassifier(Some("assembly"))
