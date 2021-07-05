@@ -14,5 +14,6 @@ bin
 project/project
 
 .bloop
+.bsp
 .metals
 metals.sbt
